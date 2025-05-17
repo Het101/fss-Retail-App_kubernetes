@@ -30,7 +30,7 @@ jobs:
     - name: Build Docker Image
       run: |
         docker build -t het101/app:${{ github.sha }} .
-        docker tag your-org/app:${{ github.sha }} het101/app:latest
+        docker tag het101/app:${{ github.sha }} het101/app:latest
 
     - name: Push Docker Image
       run: |
