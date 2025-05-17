@@ -1,4 +1,4 @@
-name: CI/CD Pipeline - Native Docker Build
+name: Build and Push Docker Image
 
 on:
   push:
@@ -44,3 +44,8 @@ jobs:
       - name: Push Docker image
         run: |
           docker push $IMAGE_NAME:${{ env.SHORT_SHA }}
+
+      - name: Push latest tag (optional)
+        run: |
+          docker tag $IMAGE_NAME:${{ env.SHORT_SHA }} $IMAGE_NAME:latest
+          docker push $IMAGE_NAME:latest
