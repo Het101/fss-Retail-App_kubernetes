@@ -1,14 +1,24 @@
 {
   "name": "retail-app",
   "version": "1.0.0",
+  "description": "Testing the trigger which is related to the project\r Testing\r Testing\r Testing",
+  "keywords": [],
+  "homepage": "https://github.com/Het101/fss-Retail-App_kubernetes#readme",
+  "bugs": {
+    "url": "https://github.com/Het101/fss-Retail-App_kubernetes/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Het101/fss-Retail-App_kubernetes.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.3",
@@ -21,6 +31,5 @@
     "nodemailer": "^6.9.15",
     "patch": "^0.0.1",
     "retail-app": "file:"
-  },
-  "description": ""
+  }
 }
