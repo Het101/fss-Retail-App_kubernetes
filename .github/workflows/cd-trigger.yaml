@@ -1,26 +1,29 @@
-name: CD - Update Infra Helm Chart
+name: Update values.yaml on image push
 
 on:
   repository_dispatch:
-    types: [update-build]
+    types: [update-image-tag]
 
 jobs:
-  update-helm:
+  update-values:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout Infra Repo
-      uses: actions/checkout@v2
+      - name: Checkout infra repo
+        uses: actions/checkout@v3
 
-    - name: Update Image Tag
-      run: |
-        echo "Updating image tag to ${{ github.event.client_payload.image_tag }}"
-        sed -i "s/tag:.*/tag: ${{ github.event.client_payload.image_tag }}/" helm-chart/values.yaml
+      - name: Setup Git
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
 
-    - name: Commit and Push
-      run: |
-        git config user.name "GitHub Actions"
-        git config user.email "actions@github.com"
-        git add helm-chart/values.yaml
-        git commit -m "Update image tag to ${{ github.event.client_payload.image_tag }}"
-        git push
+      - name: Update values.yaml
+        run: |
+          IMAGE_URL="${{ github.event.client_payload.image_url }}"
+          echo "Updating values.yaml with image: $IMAGE_URL"
+          sed -i "s|image: .*|image: $IMAGE_URL|" charts/frontend/values.yaml
+
+      - name: Commit and push
+        run: |
+          git add charts/frontend/values.yaml
+          git commit -m "Update image to $IMAGE_URL from CI"
+          git push

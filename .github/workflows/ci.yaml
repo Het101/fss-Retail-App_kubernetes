@@ -49,3 +49,14 @@ jobs:
         run: |
           docker tag $IMAGE_NAME:${{ env.SHORT_SHA }} $IMAGE_NAME:latest
           docker push $IMAGE_NAME:latest
+      
+      - name: Trigger InfraRepo to update values.yaml
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          repository: Het101/fss-Retail-App_kubernetes
+          event-type: update-image-tag
+          client-payload: |
+            {
+              "image_tag": "${{ env.SHORT_SHA }}",
+              "image_url": "$IMAGE_NAME:${{ env.SHORT_SHA }}"
+            }
