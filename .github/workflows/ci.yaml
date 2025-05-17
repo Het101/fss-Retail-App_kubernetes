@@ -10,7 +10,7 @@ jobs:
   native-build-and-push:
     runs-on: ubuntu-latest
     env:
-      IMAGE_NAME: Het101/frontend-app
+      IMAGE_NAME: het101/frontend-app
 
     steps:
       - name: Checkout repository
